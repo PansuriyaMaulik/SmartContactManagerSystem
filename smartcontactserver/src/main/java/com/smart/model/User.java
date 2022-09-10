@@ -1,6 +1,8 @@
 package com.smart.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,9 @@ public class User {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
      private int id;
+
+     @NotBlank(message = "Name field is required")
+     @Size(min = 2, max = 20, message = "Minimum 2 and Maximum 20 characters are allowed !!")
      private String name;
 
      @Column(unique = true)
@@ -99,5 +104,20 @@ public class User {
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", enabled=" + enabled +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", about='" + about + '\'' +
+                ", contacts=" + contacts +
+                '}';
     }
 }

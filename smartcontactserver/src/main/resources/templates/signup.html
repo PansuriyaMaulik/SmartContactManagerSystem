@@ -9,7 +9,62 @@
 </head>
 <body>
 <section>
-    <h1>This is Signup Page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card mt-3">
+
+                    <div class="container text-center">
+                        <img style="width: 100px;" src="" th:src="@{/img/register.png}" alt="" />
+                    </div>
+
+                    <h1 class="text-center">Register here..!!</h1>
+                    <form action="" th:action="@{/do_register}" method="post" th:object="${user}">
+
+                        <!---Name Field--->
+                        <div class="form-group">
+                            <label for="name_field">Your Name:</label>
+                            <input name="name" type="text" class="form-control" id="name_field" aria-describedby="nameHelp" placeholder="Enter here..." th:value="${user.name}" required />
+                        </div>
+
+                        <!---Email Field--->
+                        <div class="form-group">
+                            <label for="email_field">Your Email:</label>
+                            <input name="email" type="email" class="form-control" id="email_field" aria-describedby="emailHelp" placeholder="Enter here..." th:value="${user.email}" required />
+                        </div>
+
+                        <!---Password Field--->
+                        <div class="form-group">
+                            <label for="password_field">Your Password:</label>
+                            <input name="password" type="password" class="form-control" id="password_field" aria-describedby="passwordHelp" placeholder="Enter here..." th:value="${user.password}" required />
+                        </div>
+
+                        <!---About Field--->
+                        <div class="form-group">
+                            <label for="about_field">Your Name:</label>
+                            <textarea name="about" class="form-control" id="about_field" rows="5" placeholder="Enter Something about yourself..." th:value="${user.about}"> </textarea>
+                        </div>
+
+                        <!---Checkbox Field - terms and condition agreement--->
+                        <div class="form-group form check text-center">
+                            <input type="checkbox" name="agreement" class="form-check-input" id="agreement">
+                            <label for="agreement">Accept terms and conditions</label>
+                        </div>
+
+                        <!---Button Field--->
+                        <div class="container text-center">
+                            <button type="submit" class="btn bg-primary text-white">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-warning text-white">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
