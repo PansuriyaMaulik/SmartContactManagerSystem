@@ -99,7 +99,12 @@ public class UserController {
             //Image is not uploaded successfully
             session.setAttribute("message", new Message("Something went wrong !! try again..", "danger"));
         }
-
         return "normal/add_contact_form";
+    }
+
+    //Show contacts handler
+    @GetMapping("/show-contacts")
+    public String showContacts(Model m) {
+        return "show_contacts";
     }
 }
