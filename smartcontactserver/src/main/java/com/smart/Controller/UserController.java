@@ -17,17 +17,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -84,10 +82,9 @@ public class UserController {
             } else {
                 //file to folder and update the name to contact
                 contact.setImage(file.getOriginalFilename());
-                File saveFile = (new ClassPathResource("static/img")).getFile();
-                String var10000 = saveFile.getAbsolutePath();
-                Path path = Paths.get(var10000 + File.separator + file.getOriginalFilename());
-                Files.copy(file.getInputStream(), path, new CopyOption[]{StandardCopyOption.REPLACE_EXISTING});
+                File saveFile = new ClassPathResource("static/img").getFile();
+                Path path = Paths.get( saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Image is uploaded");
             }
 
@@ -108,17 +105,20 @@ public class UserController {
         return "normal/add_contact_form";
     }
 
-    //Show contacts handler
-    @GetMapping("/show-contacts")
-    public String showContacts(Model model, Principal principal) {
+    //Show contacts handler -- show 5[n] contact per page and current page [page]
+    @GetMapping("/show-contacts/{page}")
+    public String showContacts(@PathVariable("page") Integer page, Model model, Principal principal) {
         model.addAttribute("title", "View Contact");
 
         //Send Contacts list - user is logged in
         String userName = principal.getName();
         User userByUserName = this.userRepository.getUserByUserName(userName);
 
-        List<Contact> contacts = this.contactRepository.findContactByUser(userByUserName.getId());
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<Contact> contacts = this.contactRepository.findContactByUser(userByUserName.getId(), pageable);
         model.addAttribute("contacts", contacts);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("totalPages",contacts.getTotalPages());
 
         return "normal/show_contacts";
     }
