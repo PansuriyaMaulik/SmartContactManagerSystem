@@ -9,7 +9,7 @@
 </head>
 <body>
 <section>
-    <div class="card mr-3 ml-2">
+    <div class="card mr-3 ml-2" th:if="${contact}">
         <div class="card-body">
             <div class="container text-center">
                 <img src="" style="height: 200px; width: 200px;" class="my_profile_picture" th:src="@{'/img/'+${contact.image}}" alt="profile photo">
@@ -44,11 +44,15 @@
 
                 <div class="container text-center mt-3">
                     <button class="btn btn-primary btn-sm">Update</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
+                    <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!---If user don't have permission to see contact --- else block display--->
+    <h1 th:unless="${contact}" class="text-center p-3 bg-danger text-white">You don't have permission to see this contact...</h1>
+
 </section>
 </body>
 </html>
