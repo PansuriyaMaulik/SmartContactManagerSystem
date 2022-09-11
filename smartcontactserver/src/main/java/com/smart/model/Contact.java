@@ -1,15 +1,27 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.smart.model;
 
-import org.hibernate.annotations.GeneratorType;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "CONTACT")
+@Table(
+        name = "CONTACT"
+)
 public class Contact {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private int cId;
     private String name;
     private String secondName;
@@ -17,10 +29,8 @@ public class Contact {
     private String email;
     private String phone;
     private String image;
-
     @Column(length = 5000)
     private String description;
-
     @ManyToOne
     private User user;
 
@@ -28,7 +38,7 @@ public class Contact {
     }
 
     public int getcId() {
-        return cId;
+        return this.cId;
     }
 
     public void setcId(int cId) {
@@ -36,7 +46,7 @@ public class Contact {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -44,7 +54,7 @@ public class Contact {
     }
 
     public String getSecondName() {
-        return secondName;
+        return this.secondName;
     }
 
     public void setSecondName(String secondName) {
@@ -52,7 +62,7 @@ public class Contact {
     }
 
     public String getWork() {
-        return work;
+        return this.work;
     }
 
     public void setWork(String work) {
@@ -60,7 +70,7 @@ public class Contact {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -68,7 +78,7 @@ public class Contact {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
@@ -76,7 +86,7 @@ public class Contact {
     }
 
     public String getImage() {
-        return image;
+        return this.image;
     }
 
     public void setImage(String image) {
@@ -84,7 +94,7 @@ public class Contact {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -92,7 +102,7 @@ public class Contact {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {

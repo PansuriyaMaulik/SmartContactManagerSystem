@@ -1,41 +1,62 @@
 package com.smart.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="USER")
+@Table(
+        name = "USER"
+)
 public class User {
-
-     @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
-     private int id;
-
-     @NotBlank(message = "Name field is required")
-     @Size(min = 2, max = 20, message = "Minimum 2 and Maximum 20 characters are allowed !!")
-     private String name;
-
-     @Column(unique = true)
-     private String email;
-     private String password;
-     private String role;
-     private boolean enabled;
-     private String imageUrl;
-
-     @Column(length = 5000)
-     private String about;
-
-     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-     private List<Contact> contacts= new ArrayList<>();
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
+    private int id;
+    @NotBlank(
+            message = "Name field is required"
+    )
+    @Size(
+            min = 2,
+            max = 20,
+            message = "Minimum 2 and Maximum 20 characters are allowed !!"
+    )
+    private String name;
+    @Column(
+            unique = true
+    )
+    private String email;
+    private String password;
+    private String role;
+    private boolean enabled;
+    private String imageUrl;
+    @Column(
+            length = 5000
+    )
+    private String about;
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    private List<Contact> contacts = new ArrayList();
 
     public User() {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -43,7 +64,7 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -51,7 +72,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -59,7 +80,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -67,7 +88,7 @@ public class User {
     }
 
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
@@ -75,7 +96,7 @@ public class User {
     }
 
     public boolean isEnabled() {
-        return enabled;
+        return this.enabled;
     }
 
     public void setEnabled(boolean enabled) {
@@ -83,7 +104,7 @@ public class User {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return this.imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
@@ -91,7 +112,7 @@ public class User {
     }
 
     public String getAbout() {
-        return about;
+        return this.about;
     }
 
     public void setAbout(String about) {
@@ -99,25 +120,14 @@ public class User {
     }
 
     public List<Contact> getContacts() {
-        return contacts;
+        return this.contacts;
     }
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
-    @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", enabled=" + enabled +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", about='" + about + '\'' +
-                ", contacts=" + contacts +
-                '}';
+        return "User{id=" + this.id + ", name='" + this.name + "', email='" + this.email + "', password='" + this.password + "', role='" + this.role + "', enabled=" + this.enabled + ", imageUrl='" + this.imageUrl + "', about='" + this.about + "', contacts=" + this.contacts + "}";
     }
 }
