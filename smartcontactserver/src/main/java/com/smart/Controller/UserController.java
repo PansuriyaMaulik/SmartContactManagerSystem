@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -71,14 +72,11 @@ public class UserController {
             String name = principal.getName();
             User user = this.userRepository.getUserByUserName(name);
 
-            if(3>2){
-                throw new Exception();
-            }
-
             //process and uploading file
             if (file.isEmpty()) {
                 //if the image is empty then try our message
                 System.out.println("Image is empty");
+                contact.setImage("contact.png");
             } else {
                 //file to folder and update the name to contact
                 contact.setImage(file.getOriginalFilename());
@@ -121,5 +119,18 @@ public class UserController {
         model.addAttribute("totalPages",contacts.getTotalPages());
 
         return "normal/show_contacts";
+    }
+
+    //Showing particular contact details
+    @RequestMapping("/{cId}/contact")
+    public String showContactDetail(@PathVariable("cId") Integer cId, Model model)
+    {
+        System.out.println("CID"+cId);
+
+        Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+        Contact contact = contactOptional.get();
+
+        model.addAttribute("contact", contact);
+        return "normal/contact_detail";
     }
 }

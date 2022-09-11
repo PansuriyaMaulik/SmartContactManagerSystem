@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>This is about page</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-2">
+        <div class="card-body">
+            <div class="container text-center">
+                <img src="" style="height: 200px; width: 200px;" class="my_profile_picture" th:src="@{'/img/'+${contact.image}}" alt="profile photo">
+                <h3 class="mt-3"><span th:text="${contact.name}"></span></h3>
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Contact_Id</th>
+                        <td><b><span th:text="${'SCM: '+contact.cId}"></span></b></td>
+                    </tr>
+
+                    <tr>
+                        <th>Email</th>
+                        <td th:text="${contact.email}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Phone</th>
+                        <td th:text="${contact.phone}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Work</th>
+                        <td th:text="${contact.work}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="description">
+                        <th:block th:utext="${contact.description}"></th:block>
+                </div>
+
+                <div class="container text-center mt-3">
+                    <button class="btn btn-primary btn-sm">Update</button>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
