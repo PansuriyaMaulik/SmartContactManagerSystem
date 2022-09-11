@@ -5,6 +5,7 @@
 
 package com.smart.Controller;
 
+import com.smart.Repository.ContactRepository;
 import com.smart.Repository.UserRepository;
 import com.smart.helper.Message;
 import com.smart.model.Contact;
@@ -16,6 +17,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,9 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     public UserController() {
     }
@@ -104,7 +110,16 @@ public class UserController {
 
     //Show contacts handler
     @GetMapping("/show-contacts")
-    public String showContacts(Model m) {
-        return "show_contacts";
+    public String showContacts(Model model, Principal principal) {
+        model.addAttribute("title", "View Contact");
+
+        //Send Contacts list - user is logged in
+        String userName = principal.getName();
+        User userByUserName = this.userRepository.getUserByUserName(userName);
+
+        List<Contact> contacts = this.contactRepository.findContactByUser(userByUserName.getId());
+        model.addAttribute("contacts", contacts);
+
+        return "normal/show_contacts";
     }
 }
