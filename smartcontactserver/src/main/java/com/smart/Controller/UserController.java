@@ -153,4 +153,16 @@ public class UserController {
         session.setAttribute("message", new Message("Contact deleted successfully", "success"));
         return "redirect:/user/show-contacts/0";
     }
+
+    //Update contact detail
+    @PostMapping("/update-contact/{cid}")
+    public String updateContact(@PathVariable("cid") Integer cid,Model model) {
+
+        model.addAttribute("title", "Update Contact");
+
+        Contact contact = this.contactRepository.findById(cid).get();
+        model.addAttribute("contact", contact);
+
+        return "normal/update_contact";
+    }
 }
