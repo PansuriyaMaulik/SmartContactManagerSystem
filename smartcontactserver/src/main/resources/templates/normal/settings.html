@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>This is Setting Page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="my-3">Change Password: </h3>
+
+                        <form action="">
+                            <!---Old Password Field--->
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter your old password">
+                            </div>
+
+                            <!---New Password Field--->
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter your new password">
+                            </div>
+
+                            <!---Button Field--->
+                            <div class="container text-center">
+                                <button type="submit" class="btn btn-success">Change</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(()=> {
+            $('.item').removeClass('active');
+            $('#setting-link').addClass("active");
+        });
+    </script>
+</section>
+</body>
+</html>
