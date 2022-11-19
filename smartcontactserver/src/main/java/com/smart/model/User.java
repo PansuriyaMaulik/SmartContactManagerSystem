@@ -48,7 +48,8 @@ public class User {
     @OneToMany(
             cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY,
-            mappedBy = "user"
+            mappedBy = "user",
+            orphanRemoval = true
     )
     private List<Contact> contacts = new ArrayList();
 

@@ -13,6 +13,16 @@
         <div class="card-body">
             <h1 class="text-center">Your Contacts</h1>
 
+            <!--- Search Bar --->
+            <div class="search-container my-3">
+                <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contact">
+
+                <div class="search-result">
+                    <!--- Show Search result here --->
+
+                </div>
+            </div>
+
             <table class="table">
                 <thead>
                 <tr>
@@ -56,9 +66,10 @@
                     <li th:if="${currentPage+1!=totalPages}" class="page-item"><a th:href="@{'/user/show-contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a></li>
                 </ul>
             </nav>
-
         </div>
     </div>
 </section>
+
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
 </body>
 </html>

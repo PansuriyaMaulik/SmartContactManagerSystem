@@ -97,9 +97,25 @@ body {
     margin-left: 20%;
 }
 
+/* profile picture CSS Style */
 .my_profile_picture{
     width: 35px;
     height: 35px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+/* Search CSS Style */
+.search-container{
+    position: relative;
+
+}
+
+.search-input{
+    position: absolute;
+    background: white;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid gray;
+    display: none;
 }

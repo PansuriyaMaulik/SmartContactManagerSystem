@@ -18,6 +18,8 @@
                     <div class="col-md-8 offset-md-2">
                         <form action="#" th:object="${contact}" enctype="multipart/form-data" method="POST" th:action="@{/user/process-update}" class="mt-2">
 
+                            <input type="hidden" th:value="${contact.cId}" name="cId"/>
+
                             <!--- First Name --->
                             <div class="input-group">
                                 <div class="input-group-prepend">

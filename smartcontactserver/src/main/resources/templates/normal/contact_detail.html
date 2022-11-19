@@ -43,8 +43,11 @@
                 </div>
 
                 <div class="container text-center mt-3">
-                    <button class="btn btn-primary btn-sm">Update</button>
-                    <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</button>
+                    <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-block">Delete</button>
+
+                    <form method="post" th:action="@{'/user/update-contact/'+${contact.cId}}" class="mt-2">
+                        <button class="btn btn-primary btn-block">Update</button>
+                    </form>
                 </div>
             </div>
         </div>

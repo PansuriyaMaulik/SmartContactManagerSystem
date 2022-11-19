@@ -9,7 +9,24 @@
 </head>
 <body>
 <section>
-    <h1>This is private Dasbhoard</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="container text-center">
+                    <img src="" style="height: 200px; width: 200px;" class="my_profile_picture" th:src="@{'/img/contact_logo.png'}" alt="profile photo">
+                </div>
+
+                <h1 class="text-center mt-2">
+                    Start Adding Your Contact
+                </h1>
+
+                <div class="container text-center mt-3">
+                    <a th:href="@{/user/add-contact}" class="btn btn-primary btn-sm">Add Contact</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
