@@ -5,6 +5,8 @@
 
 package com.smart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,7 @@ public class Contact {
     @Column(length = 5000)
     private String description;
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public Contact() {
@@ -107,5 +110,10 @@ public class Contact {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.cId==((Contact)obj).getcId();
     }
 }
