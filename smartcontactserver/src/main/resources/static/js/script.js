@@ -30,15 +30,14 @@ const search=()=>{
             return response.json();
     }).then((data)=>{
         //data...
-            console.log(data);
 
             let text =`<div class='list-group'>`;
             data.forEach((contact)=>{
-                text += `<a href='#' class="list-group-item list-group-action"> ${contact.name}</a>`
+                text += `<a href='/user/${contact.cId}/contact' class="list-group-item list-group-action"> ${contact.name}</a>`
             });
             text += `</div>`
 
-            ${".search-result"}.html(text);
+            $(".search-result").html(text);
             $(".search-result").show();
         });
     }

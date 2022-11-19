@@ -108,10 +108,9 @@ body {
 /* Search CSS Style */
 .search-container{
     position: relative;
-
 }
 
-.search-input{
+.search-result{
     position: absolute;
     background: white;
     width: 100%;
