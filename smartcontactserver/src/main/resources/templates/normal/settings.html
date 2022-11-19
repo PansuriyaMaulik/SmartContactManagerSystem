@@ -16,15 +16,15 @@
                     <div class="card-body">
                         <h3 class="my-3">Change Password: </h3>
 
-                        <form action="">
+                        <form th:action="@{/user/change-password}" method="post">
                             <!---Old Password Field--->
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter your old password">
+                                <input name="oldPassword" type="password" class="form-control" placeholder="Enter your old password">
                             </div>
 
                             <!---New Password Field--->
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter your new password">
+                                <input name="newPassword" type="password" class="form-control" placeholder="Enter your new password">
                             </div>
 
                             <!---Button Field--->

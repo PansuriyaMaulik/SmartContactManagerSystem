@@ -24,6 +24,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,9 @@ public class UserController {
 
     @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserController() {
     }
@@ -224,5 +228,29 @@ public class UserController {
     public String openSettings()
     {
         return "normal/settings";
+    }
+
+    //Change Password Handler
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Principal principal, HttpSession session){
+        //Get Login User from DB
+        String userName = principal.getName();
+        User currentUser = this.userRepository.getUserByUserName(userName);
+
+        //Match the Old Password user enter with DB
+        if(this.bCryptPasswordEncoder.matches(oldPassword, currentUser.getPassword()))
+        {
+            //Change Password
+            currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+            this.userRepository.save(currentUser);
+            //Success Message
+            session.setAttribute("message", new Message("Your Password is successfully changed", "success"));
+        } else
+        {
+            //Error ---- Password not match
+            session.setAttribute("message", new Message("Your Old password is not matched", "danger"));
+            return "redirect:/user/settings";
+        }
+        return "redirect:/user/index";
     }
 }
